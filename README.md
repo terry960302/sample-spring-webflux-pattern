@@ -2,15 +2,17 @@
 # Sample Spring Webflux Reactive Pattern Project
 : 간단한 커뮤니티 구조의 백엔드 API 서버를 구현했습니다.(Webflux패턴 기반)
 
+참고로 완성본이 아니고 아직 작업할게 많이 남아있습니다.(수정중)
+
 ## Background
 - 포트폴리오가 전부 상업용 프로젝트이기도 하고 백엔드 관련한 개인적인 repo가 충분하지 않았다.
 - 개인적으로 만들고 있는 프로젝트(InteractiveERD)에서 백엔드를 뭘로 할지 고민을 하고 있었다.
-- 지인중 네이버분이 본인 팀에서 Spring Webflux를 사용한다고 하길래 트랜드인가 싶어 익숙한 kotlin으로 공부해보면 좋겠다는 생각이 들었다.
+- 지인중 한 분이 본인 팀에서 Spring Webflux를 사용한다고 하길래 트랜드인가 싶어 익숙한 kotlin으로 공부해보면 좋겠다는 생각이 들었다.(옷은 트랜드를 안 따라가더라도 프로그래밍은 못참지)
 
 ## Introduction
 
 ### ERD 
-<img src="https://user-images.githubusercontent.com/37768791/192202650-aa592f99-e5a7-4a12-84b2-ffb7db2b3f5e.png"/>
+<img src="https://user-images.githubusercontent.com/37햐768791/192202650-aa592f99-e5a7-4a12-84b2-ffb7db2b3f5e.png"/>
 
 ### Description
 - Kotlin 언어 사용
