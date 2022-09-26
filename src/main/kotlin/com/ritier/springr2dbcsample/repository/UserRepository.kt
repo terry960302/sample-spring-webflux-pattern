@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux
 
 
 @Repository
-interface UserRepository : ReactiveCrudRepository<User, Int> {
+interface UserRepository : ReactiveCrudRepository<User, Long> {
     @Query("SELECT u.* FROM user u WHERE u.nickname = :nickname")
     fun findByNickname(nickname: String): Flux<User>
 }

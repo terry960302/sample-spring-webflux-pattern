@@ -2,10 +2,10 @@
 # Sample Spring Webflux Reactive Pattern Project
 : 간단한 커뮤니티 구조의 백엔드 API 서버를 구현했습니다.(Webflux패턴 기반)
 
-참고로 완성본이 아니고 아직 작업할게 많이 남아있습니다.(수정중)
+### `참고로 완성본이 아니고 아직 작업할게 많이 남아있습니다.(수정중)`
 
 ## Background
-- 포트폴리오가 전부 상업용 프로젝트이기도 하고 백엔드 관련한 개인적인 repo가 충분하지 않았다.
+- 개인 포트폴리오가 전부 상업용 프로젝트이기도 하고 백엔드 관련한 개인적인 repo가 충분하지 않았다.
 - 개인적으로 만들고 있는 프로젝트(InteractiveERD)에서 백엔드를 뭘로 할지 고민을 하고 있었다.
 - 지인중 한 분이 본인 팀에서 Spring Webflux를 사용한다고 하길래 트랜드인가 싶어 익숙한 kotlin으로 공부해보면 좋겠다는 생각이 들었다.(옷은 트랜드를 안 따라가더라도 프로그래밍은 못참지)
 - reactive 패턴은 dart언어로 질리도록 해봐서 재밌을거라 생각했다.(실제로 kotlin도 재밌긴하다.)
@@ -53,7 +53,7 @@ spring:
 ```
 
 ## References
-- 공부하면서 참고한 링크는 아래에 모두 기록할 예정입니다. 프로젝트 코드보다 개념이 필요하신분들은 아래 링크들에 잘 기록되어있을테니 참고하시면 되겠습니다.(주의 : 개념이 없는 링크들도 있을수도 있음.)
+: 공부하면서 참고한 링크는 아래에 모두 기록할 예정입니다. 프로젝트 코드보다 개념이 필요하신분들은 아래 링크들에 잘 기록되어있을테니 참고하시면 되겠습니다.(주의 : 개념이 없는 링크들도 있을수도 있음.)
 
 #### R2DBC 사용법 파악 및 아키텍처 파악
 - URL : https://github.com/piomin/sample-spring-data-webflux
@@ -77,3 +77,7 @@ spring:
 #### Webflux 폴더구조 참고용
 - URL : https://github.com/kamalhm/spring-boot-r2dbc/tree/master/src/main/java/com/khm/reactivepostgres
 
+#### R2DBC에서 관계 테이블 구현(공식적으로 r2dbc는 관계relation를 지원하지 않는다.)
+- URL : https://github.com/spring-projects/spring-data-r2dbc/issues/99
+- URL : https://github.com/spring-projects/spring-data-r2dbc/issues/352
+- URL : https://heesutory.tistory.com/33

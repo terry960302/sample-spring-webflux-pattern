@@ -37,21 +37,7 @@ class UserHandler {
         }
 
     fun getUserById(request: ServerRequest): Mono<ServerResponse> = ServerResponse.ok().contentType(APPLICATION_JSON)
-        .body(userService.findUserById(request.pathVariable("id").toInt()), User::class.java).onErrorResume { e ->
+        .body(userService.findUserById(request.pathVariable("id").toLong()), User::class.java).onErrorResume { e ->
             Mono.just("Error" + e.message).flatMap { ServerResponse.ok().contentType(TEXT_PLAIN).bodyValue(it) }
         }
-
-//    fun getUsersByNickname(request: ServerRequest): Mono<ServerResponse> =
-//        ServerResponse.ok().contentType(APPLICATION_JSON)
-//            .body(userService.findUsersByNickname(request.queryParam("nickname").get()), User::class.java)
-//            .onErrorResume { e ->
-//                Mono.just("Error" + e.message)
-//                    .flatMap { ServerResponse.ok().contentType(TEXT_PLAIN).bodyValue(it) }
-//            }
-    //    fun getAllUsers(request: ServerRequest): Mono<ServerResponse> = ServerResponse.ok().contentType(APPLICATION_JSON)
-//        .body(userService.findAllUsers(), User::class.java)
-//        .onErrorResume { e ->
-//            Mono.just("Error" + e.message)
-//                .flatMap { ServerResponse.ok().contentType(TEXT_PLAIN).bodyValue(it) }
-//        }
 }

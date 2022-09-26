@@ -1,8 +1,6 @@
 package com.ritier.springr2dbcsample.datasource
 
-import io.r2dbc.spi.ConnectionFactories
 import io.r2dbc.spi.ConnectionFactory
-import io.r2dbc.spi.ConnectionFactoryOptions
 import io.r2dbc.spi.ConnectionFactoryOptions.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
@@ -41,11 +39,13 @@ class DataSourceR2dbcConfig {
         DatabaseClient.builder().connectionFactory(connectionFactory).build()
 
 
+    // schema generation (R2DBC에서 공식적으로 지원하지 않아 만듬)
     @Bean
     fun initializer(): ConnectionFactoryInitializer? {
         val initializer = ConnectionFactoryInitializer()
         val resourceDatabasePopulator = ResourceDatabasePopulator()
-        resourceDatabasePopulator.addScript(ClassPathResource("schema.sql"))
+        resourceDatabasePopulator.addScript(ClassPathResource("createSchema.sql"))
+//        resourceDatabasePopulator.addScript(ClassPathResource("insertSchema.sql")) // 중복된 데이터 쌓이는 거 방지를 위해 주석
         initializer.setConnectionFactory(connectionFactory())
         initializer.setDatabasePopulator(resourceDatabasePopulator)
         return initializer

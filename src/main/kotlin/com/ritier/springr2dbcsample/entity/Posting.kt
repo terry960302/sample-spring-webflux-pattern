@@ -1,15 +1,21 @@
 package com.ritier.springr2dbcsample.entity
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Column
+import org.springframework.data.relational.core.mapping.Table
+import java.sql.Date
 
+@Table("postings")
 data class Posting(
-    @JsonProperty("id") val id: Int,
-    @JsonProperty("userId") val userId: Int,
-    @JsonProperty("images") val images: ArrayList<Image>,
-    @JsonProperty("contents") val contents: String,
+    @Id
+    @Column("id") val id: Long,
+    @Column("userid") val user: User,
+    @Column("contents") val contents: String,
+    @Column("createdat") val createdAt: Date,
 ) {
     override fun toString(): String {
-        return "Posting { id : $id, userId : $userId, images : ${images.map { it -> it.toString() }}, contents : $contents}"
+        return "Posting { id : $id, user : ${user.toString()}, contents : $contents}, createdAt : $createdAt"
     }
 }
 
