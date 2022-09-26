@@ -12,8 +12,7 @@
 ## Introduction
 
 ### ERD 
-<img src="https://user-images.githubusercontent.com/37햐768791/192202650-aa592f99-e5a7-4a12-84b2-ffb7db2b3f5e.png"/>
-
+![image](https://user-images.githubusercontent.com/37768791/192204542-0954ebb6-f386-4acf-9fd1-19338bbfc79b.png)
 ### Description
 - Kotlin 언어 사용
 - Webflux 패턴 채택
