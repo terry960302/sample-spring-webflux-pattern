@@ -14,33 +14,36 @@
 ### ERD 
 ![image](https://user-images.githubusercontent.com/37768791/192204542-0954ebb6-f386-4acf-9fd1-19338bbfc79b.png)
 ### Description
-- Kotlin 언어 사용
-- Webflux 패턴 채택
-- 함수형 프로그래밍 적용
-- Postgresql 드라이버 사용
-- 논블로킹을 위해 JPA가 아닌 R2DBC 채택 
+- `Kotlin` 언어 사용
+- `Webflux` 패턴 채택
+- `함수형` 프로그래밍 적용
+- `Postgresql` 드라이버 사용
+- 논블로킹을 위해 JPA가 아닌 `R2DBC` 채택
+- 클라우드는 `GCP`를 사용(연동하는 코드는 없으니 굳이 필요없는 정보이긴함.)
+
+
 
 ## References
 
-R2DBC 사용법 파악 및 아키텍처
+#### R2DBC 사용법 파악 및 아키텍처 파악
 - URL : https://github.com/piomin/sample-spring-data-webflux
 - URL : https://www.vinsguru.com/spring-data-r2dbc/
 - URL : https://github.com/hantsy/spring-r2dbc-sample
 - URL : https://medium.com/bliblidotcom-techblog/reactive-spring-boot-application-with-r2dbc-and-postgresql-849fc7811135
 - URL : https://github.com/kakaohairshop/spring-r2dbc-study
 
-application.yaml 사용법
+#### application.yaml 사용법
 - URL : https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html
 
-profile별 빌드 및 실행방법
+#### profile별 빌드 및 실행방법
 - URL : https://1minute-before6pm.tistory.com/12
 
-Route 코드 리팩토링
+#### Route 코드 리팩토링
 - URL : https://github.com/spring-projects/spring-framework/issues/28603
 
-Webflux 에러 핸들링 
+#### Webflux 에러 핸들링 
 - URL : https://www.baeldung.com/spring-webflux-errors
 
-Webflux 폴더구조 참고용
+#### Webflux 폴더구조 참고용
 - URL : https://github.com/kamalhm/spring-boot-r2dbc/tree/master/src/main/java/com/khm/reactivepostgres
 
