@@ -9,10 +9,10 @@ import java.sql.Date
 @Table("postings")
 data class Posting(
     @Id
-    @Column("id") val id: Long,
-    @Column("userid") val user: User,
+    @Column("posting_id") val id: Long,
+    @Column("user_id") val user: User,
     @Column("contents") val contents: String,
-    @Column("createdat") val createdAt: Date,
+    @Column("created_at") val createdAt: Date,
 ) {
     override fun toString(): String {
         return "Posting { id : $id, user : ${user.toString()}, contents : $contents}, createdAt : $createdAt"

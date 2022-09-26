@@ -45,7 +45,7 @@ class DataSourceR2dbcConfig {
         val initializer = ConnectionFactoryInitializer()
         val resourceDatabasePopulator = ResourceDatabasePopulator()
         resourceDatabasePopulator.addScript(ClassPathResource("createSchema.sql"))
-//        resourceDatabasePopulator.addScript(ClassPathResource("insertSchema.sql")) // 중복된 데이터 쌓이는 거 방지를 위해 주석
+        resourceDatabasePopulator.addScript(ClassPathResource("insertSchema.sql")) // 중복된 데이터 쌓이는 거 방지를 위해 주석
         initializer.setConnectionFactory(connectionFactory())
         initializer.setDatabasePopulator(resourceDatabasePopulator)
         return initializer

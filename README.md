@@ -78,6 +78,13 @@ spring:
 - URL : https://github.com/kamalhm/spring-boot-r2dbc/tree/master/src/main/java/com/khm/reactivepostgres
 
 #### R2DBC에서 관계 테이블 구현(공식적으로 r2dbc는 관계relation를 지원하지 않는다.)
+지원하고 있지 않다는 이슈
 - URL : https://github.com/spring-projects/spring-data-r2dbc/issues/99
 - URL : https://github.com/spring-projects/spring-data-r2dbc/issues/352
+
+관계 매핑 구현방법
+- URL : https://tolkiana.com/introduction-to-spring-data-r2dbc-with-kotlin/
 - URL : https://heesutory.tistory.com/33
+- URL : https://heesutory.tistory.com/35
+  - Lombok의 @Builder 대신 kotlin으로 해결(URL : https://levelup.gitconnected.com/kotlin-makes-lombok-obsolete-9ed3318596cb, https://stackoverflow.com/questions/36140791/how-to-implement-builder-pattern-in-kotlin)
+- URL : https://binux.tistory.com/156

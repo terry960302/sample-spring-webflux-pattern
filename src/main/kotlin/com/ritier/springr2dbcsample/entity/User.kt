@@ -8,12 +8,13 @@ import org.springframework.data.relational.core.mapping.Table
 @Table("users")
 data class User(
     @Id
-    @Column("id") val id: Long,
+    @Column("user_id") val id: Long,
     @Column("nickname") val nickname: String,
     @Column("age") val age: Int,
-    @Column("profileImgid") val profileImg: Image, // 1-1
+    @Column("profile_img_id") val profileImgId: Long?, // 1-1
+    @Transient val profileImg: Image?,
 ) {
     override fun toString(): String {
-        return "User{id = $id, nickname = $nickname, age = $age, profileImg : $${profileImg.toString()}}"
+        return "User{id = $id, nickname = $nickname, age = $age, profile_img_id : $${profileImg.toString()}}"
     }
 }

@@ -12,6 +12,7 @@ class UserService {
     @Autowired
     private lateinit var userRepository: UserRepository
 
+
     fun createUser(user: Mono<User>): Mono<User> = user.flatMap { this.userRepository.save(it) }
 
     fun findAllUsers(): Flux<User> = this.userRepository.findAll()

@@ -7,9 +7,9 @@ import org.springframework.data.relational.core.mapping.Table
 @Table("posting_images")
 data class PostingImage(
     @Id
-    @Column("id") val id: Long,
-    @Column("postingid") val posting: Posting,
-    @Column("imageid") val image: Image,
+    @Column("posting_image_id") val id: Long,
+    @Column("posting_id") val posting: Posting,
+    @Column("image_id") val image: Image,
 ) {
     override fun toString(): String {
         return "PostingImage{ id : $id, posting : ${posting.toString()}, image : ${image.toString()}}"
