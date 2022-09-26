@@ -16,6 +16,7 @@
 ![image](https://user-images.githubusercontent.com/37768791/192204542-0954ebb6-f386-4acf-9fd1-19338bbfc79b.png)
 ### Tech Stacks
 - `Kotlin` 언어 사용(이전에 안드로이드 개발을 kotlin으로도 했고 꽤나 열심히 언어공부를 했던 언어이기에 선택함.)
+- `gradle` 빌드 방식 적용(안드로이드에 익숙함)
 - `Webflux` 패턴 채택
 - `함수형` 프로그래밍 적용
 - `Postgresql` 드라이버 사용(원래는 mysql이 익숙한데 tokenizing때문에 postgresql을 공부하기로 맘먹음)
@@ -25,11 +26,31 @@
 ### Description(feat.예정된 작업)
 - 관계 테이블 커스텀 쿼리 적용
 - 서버 에러 핸들링
-- authguard 적용(간단한 정도의 인증/인가 미들웨어 구현)
+- Authguard 적용(간단한 정도의 인증/인가 미들웨어 구현)
 - 테스트 코드 작성
 - 배포 자동화 CI/CD (profile 환경별 빌드 및 배포)
 - sub : kotlin coroutine 적용(필요한 부분이 있는지 만들면서 파악, 적용하게 되면 Mono, Flux 객체를 안쓸수도 있음)
 - (microservice는 손이 너무 많이 가서 일단 보류...)
+
+## Get Started!
+### Environment(yml) Setup
+: `application.yaml` 파일을 .gitignore 처리를 했지만 아래와 같이 적으면 문제 없이 실행할 수 있습니다. 혹시나 다른 데이터베이스 드라이버를 사용하시는 경우라면 datasource파일 및 gradle을 수정할 필요가 있습니다.
+```yml
+# src/main/resources/application.yaml
+spring:
+  config:
+    activate:
+      on-profile: local
+  server:
+    port: 8000
+  r2dbc:
+    protocol: r2dbc:postgresql
+    host: localhost
+    port: 5432
+    username: postgres
+    password: postgres
+    database: postgres
+```
 
 ## References
 - 공부하면서 참고한 링크는 아래에 모두 기록할 예정입니다. 프로젝트 코드보다 개념이 필요하신분들은 아래 링크들에 잘 기록되어있을테니 참고하시면 되겠습니다.(주의 : 개념이 없는 링크들도 있을수도 있음.)
