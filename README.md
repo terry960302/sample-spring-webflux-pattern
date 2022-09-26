@@ -8,22 +8,31 @@
 - 포트폴리오가 전부 상업용 프로젝트이기도 하고 백엔드 관련한 개인적인 repo가 충분하지 않았다.
 - 개인적으로 만들고 있는 프로젝트(InteractiveERD)에서 백엔드를 뭘로 할지 고민을 하고 있었다.
 - 지인중 한 분이 본인 팀에서 Spring Webflux를 사용한다고 하길래 트랜드인가 싶어 익숙한 kotlin으로 공부해보면 좋겠다는 생각이 들었다.(옷은 트랜드를 안 따라가더라도 프로그래밍은 못참지)
+- reactive 패턴은 dart언어로 질리도록 해봐서 재밌을거라 생각했다.(실제로 kotlin도 재밌긴하다.)
 
 ## Introduction
 
 ### ERD 
 ![image](https://user-images.githubusercontent.com/37768791/192204542-0954ebb6-f386-4acf-9fd1-19338bbfc79b.png)
-### Description
-- `Kotlin` 언어 사용
+### Tech Stacks
+- `Kotlin` 언어 사용(이전에 안드로이드 개발을 kotlin으로도 했고 꽤나 열심히 언어공부를 했던 언어이기에 선택함.)
 - `Webflux` 패턴 채택
 - `함수형` 프로그래밍 적용
-- `Postgresql` 드라이버 사용
+- `Postgresql` 드라이버 사용(원래는 mysql이 익숙한데 tokenizing때문에 postgresql을 공부하기로 맘먹음)
 - 논블로킹을 위해 JPA가 아닌 `R2DBC` 채택
 - 클라우드는 `GCP`를 사용(연동하는 코드는 없으니 굳이 필요없는 정보이긴함.)
 
-
+### Description(feat.예정된 작업)
+- 관계 테이블 커스텀 쿼리 적용
+- 서버 에러 핸들링
+- authguard 적용(간단한 정도의 인증/인가 미들웨어 구현)
+- 테스트 코드 작성
+- 배포 자동화 CI/CD (profile 환경별 빌드 및 배포)
+- sub : kotlin coroutine 적용(필요한 부분이 있는지 만들면서 파악, 적용하게 되면 Mono, Flux 객체를 안쓸수도 있음)
+- (microservice는 손이 너무 많이 가서 일단 보류...)
 
 ## References
+- 공부하면서 참고한 링크는 아래에 모두 기록할 예정입니다. 프로젝트 코드보다 개념이 필요하신분들은 아래 링크들에 잘 기록되어있을테니 참고하시면 되겠습니다.(주의 : 개념이 없는 링크들도 있을수도 있음.)
 
 #### R2DBC 사용법 파악 및 아키텍처 파악
 - URL : https://github.com/piomin/sample-spring-data-webflux
