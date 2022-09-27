@@ -23,6 +23,20 @@ class UserHandler {
                     .flatMap { it -> ServerResponse.ok().contentType(TEXT_PLAIN).bodyValue(it) }
             }
 
+    fun updateUser(request: ServerRequest): Mono<ServerResponse> =
+        userService.updateUser(request.pathVariable("id").toLong(), request.bodyToMono(User::class.java))
+            .flatMap { ServerResponse.ok().contentType(APPLICATION_JSON).bodyValue(it) }.onErrorResume { e ->
+                Mono.just("Error" + e.message)
+                    .flatMap { it -> ServerResponse.ok().contentType(TEXT_PLAIN).bodyValue(it) }
+            }
+
+    fun deleteUser(request: ServerRequest): Mono<ServerResponse> =
+        userService.deleteUser(request.pathVariable("id").toLong())
+            .flatMap { ServerResponse.ok().contentType(APPLICATION_JSON).bodyValue(it) }.onErrorResume { e ->
+                Mono.just("Error" + e.message)
+                    .flatMap { it -> ServerResponse.ok().contentType(TEXT_PLAIN).bodyValue(it) }
+            }
+
 
     fun getUsers(request: ServerRequest): Mono<ServerResponse> =
         ServerResponse.ok().contentType(APPLICATION_JSON).body(

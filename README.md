@@ -2,7 +2,7 @@
 # Sample Spring Webflux Reactive Pattern Project
 : 간단한 커뮤니티 구조의 백엔드 API 서버를 구현했습니다.(Webflux패턴 기반)
 
-### `참고로 완성본이 아니고 아직 작업할게 많이 남아있습니다.(수정중)`
+### `참고로 완성본이 아니고 아직 작업할게 많이 남아있습니다.(수정중) = There's so many works to be done(it's not finished version).`
 
 ## Background
 - 개인 포트폴리오가 전부 상업용 프로젝트이기도 하고 백엔드 관련한 개인적인 repo가 충분하지 않았다.
@@ -88,3 +88,7 @@ spring:
 - URL : https://heesutory.tistory.com/35
   - Lombok의 @Builder 대신 kotlin으로 해결(URL : https://levelup.gitconnected.com/kotlin-makes-lombok-obsolete-9ed3318596cb, https://stackoverflow.com/questions/36140791/how-to-implement-builder-pattern-in-kotlin)
 - URL : https://binux.tistory.com/156
+
+#### 코루틴 적용하는 법(코루틴 도입배경)
+- URL : https://techblog.woowahan.com/7349/
+- URL : https://appleg1226.tistory.com/16

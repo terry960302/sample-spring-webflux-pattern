@@ -12,23 +12,25 @@ class UserService {
     @Autowired
     private lateinit var userRepository: UserRepository
 
+    fun createUser(user: Mono<User>): Mono<User> = user.flatMap { userRepository.save(it) }
 
-    fun createUser(user: Mono<User>): Mono<User> = user.flatMap { this.userRepository.save(it) }
+    fun findAllUsers(): Flux<User> = userRepository.findAll()
 
-    fun findAllUsers(): Flux<User> = this.userRepository.findAll()
+    fun findUserById(id: Long): Mono<User> = userRepository.findById(id);
 
-    fun findUserById(id: Long): Mono<User> = this.userRepository.findById(id);
+    fun findUsersByNickname(nickname: String): Flux<User> = userRepository.findByNickname(nickname)
 
-    fun findUsersByNickname(nickname: String): Flux<User> = this.userRepository.findByNickname(nickname)
-
-    fun updateUser(id: Long, user: Mono<User>): Mono<User> = this.userRepository
+    fun updateUser(id: Long, user: Mono<User>): Mono<User> = userRepository
         .findById(id).flatMap { it ->
-            this.userRepository.save(
-                it.copy(
-                    nickname = it.nickname,
-                    age = it.age
+            user.flatMap { newUser ->
+                userRepository.save(
+                    it.copy(
+                        nickname = newUser.nickname,
+                        age = newUser.age,
+                        profileImgId = newUser.profileImgId,
+                    )
                 )
-            )
+            }
         }
 
     fun deleteUser(id: Long): Mono<Void> = this.userRepository.deleteById(id)

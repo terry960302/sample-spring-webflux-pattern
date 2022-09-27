@@ -27,6 +27,8 @@ class RouterConfig {
                     .GET("", accept(APPLICATION_JSON)) { userHandler.getUsers(it) }
                     .GET("", queryParam("nickname") { _: String? -> true }) { userHandler.getUsers(it) }
                     .POST("") { userHandler.createUser(it) }
+                    .PUT("/{id}") { userHandler.updateUser(it) }
+                    .DELETE("/{id}") { userHandler.deleteUser(it) }
             }
             .build()
 

@@ -12,7 +12,7 @@ data class Posting(
     @Column("posting_id") val id: Long,
     @Column("user_id") val user: User,
     @Column("contents") val contents: String,
-    @Column("created_at") val createdAt: Date,
+    @Column("created_at") val createdAt: String,
 ) {
     override fun toString(): String {
         return "Posting { id : $id, user : ${user.toString()}, contents : $contents}, createdAt : $createdAt"

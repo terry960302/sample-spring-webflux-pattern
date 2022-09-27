@@ -21,7 +21,7 @@ class UserMapper : BiFunction<Row, RowMetadata, User> {
             url = row.get("url", String::class.java)!!,
             width = row.get("width")!!.toString().toInt(),
             height = row.get("height")!!.toString().toInt(),
-            createdAt = row.get("created_at")!!.toString(),
+            createdAt = row.get("created_at", String::class.java)!!,
         )
     )
 }

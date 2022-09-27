@@ -15,7 +15,7 @@ data class Comment(
     @Column("posting_id") val posting: Posting,
     @Column("contents") val contents : String,
     @CreatedDate
-    @Column("created_at") val createdAt: Date,
+    @Column("created_at") val createdAt: String,
 ) {
     override fun toString(): String {
         return "Comment { id : $id, user : ${user.toString()}, contents : $contents, posting : ${posting.toString()} }"
