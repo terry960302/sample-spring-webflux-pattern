@@ -2,13 +2,13 @@
 # Sample Spring Webflux Reactive Pattern Project
 : 간단한 커뮤니티 구조의 백엔드 API 서버를 구현했습니다.(Webflux패턴 기반)
 
-### `참고로 완성본이 아니고 아직 작업할게 많이 남아있습니다.(수정중) = There's so many works to be done(it's not finished version).`
+### `참고로 완성본이 아니고 아직 작업할게 많이 남아있습니다.(수정중) = There's many works to be done(it's not finished version).`
 
 ## Background
 - 개인 포트폴리오가 전부 상업용 프로젝트이기도 하고 백엔드 관련한 개인적인 repo가 충분하지 않았다.
 - 개인적으로 만들고 있는 프로젝트(InteractiveERD)에서 백엔드를 뭘로 할지 고민을 하고 있었다.
 - 지인중 한 분이 본인 팀에서 Spring Webflux를 사용한다고 하길래 트랜드인가 싶어 익숙한 kotlin으로 공부해보면 좋겠다는 생각이 들었다.(옷은 트랜드를 안 따라가더라도 프로그래밍은 못참지)
-- reactive 패턴은 dart언어로 질리도록 해봐서 재밌을거라 생각했다.(실제로 kotlin도 재밌긴하다.)
+- reactive 패턴은 dart언어로 질리도록 해봐서 재밌을거라 생각했다.
 
 ## Introduction
 
@@ -24,12 +24,12 @@
 - 클라우드는 `GCP`를 사용(연동하는 코드는 없으니 굳이 필요없는 정보이긴함.)
 
 ### Description(feat.예정된 작업)
-- 관계 테이블 커스텀 쿼리 적용
+- ~~관계 테이블 커스텀 쿼리 적용~~
+- ~~kotlin coroutine 적용(코드 가독성을 위해)~~
 - 서버 에러 핸들링
 - Authguard 적용(간단한 정도의 인증/인가 미들웨어 구현)
 - 테스트 코드 작성
 - 배포 자동화 CI/CD (profile 환경별 빌드 및 배포)
-- sub : kotlin coroutine 적용(필요한 부분이 있는지 만들면서 파악, 적용하게 되면 Mono, Flux 객체를 안쓸수도 있음)
 - (microservice는 손이 너무 많이 가서 일단 보류...)
 
 ## Get Started!
@@ -92,3 +92,8 @@ spring:
 #### 코루틴 적용하는 법(코루틴 도입배경)
 - URL : https://techblog.woowahan.com/7349/
 - URL : https://appleg1226.tistory.com/16
+- URL(coRouter 구현) : https://veluxer62.github.io/tutorials/spring-web-flux-functional-endpoint-api/
+
+#### Repository DatabaseClient Transaction 적용
+- URL : https://spring.io/blog/2019/05/16/reactive-transactions-with-spring
+- 

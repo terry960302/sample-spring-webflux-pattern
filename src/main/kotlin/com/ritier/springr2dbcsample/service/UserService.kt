@@ -2,6 +2,7 @@ package com.ritier.springr2dbcsample.service
 
 import com.ritier.springr2dbcsample.repository.UserRepository
 import com.ritier.springr2dbcsample.entity.User
+import kotlinx.coroutines.flow.Flow
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
@@ -12,26 +13,23 @@ class UserService {
     @Autowired
     private lateinit var userRepository: UserRepository
 
-    fun createUser(user: Mono<User>): Mono<User> = user.flatMap { userRepository.save(it) }
+    suspend fun createUser(user: User): User = userRepository.save(user)
 
-    fun findAllUsers(): Flux<User> = userRepository.findAll()
+    suspend fun findAllUsers(): Flow<User> = userRepository.findAll()
 
-    fun findUserById(id: Long): Mono<User> = userRepository.findById(id);
+    suspend fun findUserById(id: Long): User = userRepository.findById(id);
 
-    fun findUsersByNickname(nickname: String): Flux<User> = userRepository.findByNickname(nickname)
+    suspend fun findUsersByNickname(nickname: String): Flow<User> = userRepository.findByNickname(nickname)
 
-    fun updateUser(id: Long, user: Mono<User>): Mono<User> = userRepository
-        .findById(id).flatMap { it ->
-            user.flatMap { newUser ->
-                userRepository.save(
-                    it.copy(
-                        nickname = newUser.nickname,
-                        age = newUser.age,
-                        profileImgId = newUser.profileImgId,
-                    )
-                )
-            }
-        }
-
-    fun deleteUser(id: Long): Mono<Void> = this.userRepository.deleteById(id)
+    suspend fun updateUser(id: Long, user: User): User {
+        val originUser = userRepository.findById(id)
+        return userRepository.save(
+            originUser.copy(
+                nickname = user.nickname,
+                age = user.age,
+                profileImgId = user.profileImgId,
+            )
+        )
+    }
+    suspend fun deleteUser(id: Long): Unit = userRepository.deleteById(id)
 }
