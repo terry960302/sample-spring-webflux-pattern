@@ -32,6 +32,7 @@ class RouterConfig {
         }
     }
 
+// reactor pattern
 //    @Bean
 //    fun routerFunction(): RouterFunction<*> {
 //        val userRoute: RouterFunction<ServerResponse> = route()
