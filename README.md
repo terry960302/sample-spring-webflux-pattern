@@ -50,10 +50,16 @@ spring:
     username: postgres
     password: postgres
     database: postgres
+  storage:
+    cred-path: <YOUR CONFIG CREDENTIAL FILE PATH>
+    project-id: <YOUR GCP STORAGE PROJECT ID>
+    bucket-name: <YOUR GCP STORAGE BUCKET NAME>
 ```
 
 ## References
 : 공부하면서 참고한 링크는 아래에 모두 기록할 예정입니다. 프로젝트 코드보다 개념이 필요하신분들은 아래 링크들에 잘 기록되어있을테니 참고하시면 되겠습니다.(주의 : 개념이 없는 링크들도 있을수도 있음.)
+
+(Warning: it's almost Korean blog links. )
 
 #### R2DBC 사용법 파악 및 아키텍처 파악
 - URL : https://github.com/piomin/sample-spring-data-webflux
@@ -93,6 +99,7 @@ spring:
 - URL : https://techblog.woowahan.com/7349/
 - URL : https://appleg1226.tistory.com/16
 - URL(coRouter 구현) : https://veluxer62.github.io/tutorials/spring-web-flux-functional-endpoint-api/
+- URL : https://umbum.dev/1047
 
 #### Repository DatabaseClient Transaction 적용
 - URL : https://spring.io/blog/2019/05/16/reactive-transactions-with-spring

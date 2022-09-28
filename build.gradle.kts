@@ -27,12 +27,16 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
 
-	//r2dbc
+	// r2dbc for postgresql
 	implementation("io.r2dbc:r2dbc-postgresql:0.8.13.RELEASE")
 	implementation("org.springframework.data:spring-data-jdbc:2.4.3")
 	runtimeOnly("io.r2dbc:r2dbc-postgresql")
 	runtimeOnly("org.postgresql:postgresql")
 	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+
+	// gcp
+	implementation(platform("com.google.cloud:libraries-bom:26.1.2"))
+	implementation("com.google.cloud:google-cloud-storage")
 }
 
 tasks.withType<KotlinCompile> {
