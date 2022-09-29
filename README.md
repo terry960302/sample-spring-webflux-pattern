@@ -13,7 +13,7 @@
 ## Introduction
 
 ### ERD 
-![image](https://user-images.githubusercontent.com/37768791/192204542-0954ebb6-f386-4acf-9fd1-19338bbfc79b.png)
+![image](https://user-images.githubusercontent.com/37768791/192972062-0a38529b-c326-4b6f-9917-4b6a547b481c.png)
 ### Tech Stacks
 - `Kotlin` 언어 사용(이전에 안드로이드 개발을 kotlin으로도 했고 꽤나 열심히 언어공부를 했던 언어이기에 선택함.)
 - `gradle` 빌드 방식 적용(안드로이드에 익숙함)
