@@ -103,4 +103,7 @@ spring:
 
 #### Repository DatabaseClient Transaction 적용
 - URL : https://spring.io/blog/2019/05/16/reactive-transactions-with-spring
-- 
+
+#### Logger Setup
+- URL : https://jsonobject.tistory.com/500
+- URL : https://www.reddit.com/r/Kotlin/comments/8gbiul/slf4j_loggers_in_3_ways/

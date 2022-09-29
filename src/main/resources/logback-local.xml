@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+
+<configuration>
+
+    <!-- 로그 파일을 적재할 디렉토리 경로를 지정 -->
+    <property name="LOG_FILE_PATH" value="/home/foobar/logs"/>
+    <!-- 로그 파일을 적재할 파일 이름을 지정 -->
+    <property name="LOG_FILE_NAME" value="foobar"/>
+
+    <!-- TEXT_CONSOLE 어펜더 정의 -->
+    <!-- 로컬 개발 환경에 적합 -->
+    <appender name="TEXT_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <!-- TEXT_FILE 어펜더 정의 -->
+    <!-- 운영 환경에 적합 -->
+    <!-- 일자별로 로그 파일을 적재하되, 100MB를 초과하면 로그 파일 분할 -->
+    <!-- 최대 7일치를 보관하고 나머지는 삭제, 최대 1GB를 초과해도 나머지를 삭제 -->
+    <appender name="TEXT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE_PATH}/${LOG_FILE_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_PATH}/${LOG_FILE_NAME}_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- GELF_UDP 어펜더 정의 -->
+    <!-- 로그를 원격지의 Graylog 서버로 전송 -->
+    <appender name="GELF_UDP" class="biz.paluch.logging.gelf.logback.GelfLogbackAppender">
+        <host>udp:{hostname}</host>
+        <port>{port}</port>
+        <version>1.1</version>
+        <extractStackTrace>true</extractStackTrace>
+        <filterStackTrace>true</filterStackTrace>
+        <mdcProfiling>true</mdcProfiling>
+        <timestampPattern>yyyy-MM-dd HH:mm:ss,SSSS</timestampPattern>
+        <includeFullMdc>true</includeFullMdc>
+        <additionalFields>appender=GELF_UDP</additionalFields>
+        <additionalFieldTypes>appender=String</additionalFieldTypes>
+        <maximumMessageSize>8192</maximumMessageSize>
+    </appender>
+
+    <!-- 로거 이름이 GELF_UDP로 발생된 모든 INFO 레벨 이하 로그를 GELF_UDP 어펜더로 로그 전송 -->
+    <!-- 다른 어펜더에는 적재되지 않도록 제한 -->
+    <logger name="GELF_UDP" level="INFO" additivity="false">
+        <appender-ref ref="GELF_UDP"/>
+    </logger>
+
+</configuration>

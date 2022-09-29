@@ -1,5 +1,6 @@
 package com.ritier.springr2dbcsample.handler
 
+import com.ritier.springr2dbcsample.dto.UserDto
 import com.ritier.springr2dbcsample.entity.User
 import com.ritier.springr2dbcsample.service.UserService
 import kotlinx.coroutines.reactor.awaitSingle
@@ -21,7 +22,7 @@ class UserHandler {
     suspend fun createUser(request: ServerRequest): ServerResponse {
         return try {
             val reqBody = request.awaitBody<User>()
-            val user = userService.createUser(reqBody)
+            val user = userService.createUser(UserDto.from(reqBody))
             ServerResponse.ok().contentType(APPLICATION_JSON).bodyValueAndAwait(user)
         } catch (e: Error) {
             println("Error : ${e.message}")

@@ -25,9 +25,9 @@ class RouterConfig {
     fun apiRouter(): RouterFunction<ServerResponse> {
         return coRouter {
             "/api".nest {
-                "/user".nest {
-                    GET("/{id}", accept(APPLICATION_JSON)) { userHandler.getUserById(it) }
-                    GET("", accept(APPLICATION_JSON)) { userHandler.getUsers(it) }
+                (accept(APPLICATION_JSON) and "/user").nest {
+                    GET("/{id}") { userHandler.getUserById(it) }
+                    GET("") { userHandler.getUsers(it) }
                     GET("", queryParam("nickname") { _: String? -> true }) { userHandler.getUsers(it) }
                     POST("") { userHandler.createUser(it) }
                     PUT("/{id}") { userHandler.updateUser(it) }

@@ -37,6 +37,9 @@ dependencies {
 	// gcp
 	implementation(platform("com.google.cloud:libraries-bom:26.1.2"))
 	implementation("com.google.cloud:google-cloud-storage")
+
+	// logger
+	implementation(group = "io.github.microutils", name = "kotlin-logging-jvm", version = "2.0.6")
 }
 
 tasks.withType<KotlinCompile> {
