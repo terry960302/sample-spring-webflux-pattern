@@ -19,7 +19,7 @@
 
 ### About `R2DBC`
 1. It's not an ORM(should write raw query and mapper in some cases)
-2. We use R2DBC because of blocking issue when using JPA(cause blocking) instead.
+2. Recommend to use R2DBC because of blocking issue when using JDBC(it's blocking API) instead.
    - Could not take advantage of confidence when using JPA.
 
 ## Introduction
@@ -79,6 +79,7 @@ spring:
 
 #### R2DBC 사용법 파악 및 아키텍처 파악(R2DBC use-cases and architectures)
 - URL : https://github.com/piomin/sample-spring-data-webflux
+- URL : https://docs.spring.io/spring-data/r2dbc/docs/current-SNAPSHOT/reference/html/#reference
 - URL : https://www.vinsguru.com/spring-data-r2dbc/
 - URL : https://github.com/hantsy/spring-r2dbc-sample
 - URL : https://medium.com/bliblidotcom-techblog/reactive-spring-boot-application-with-r2dbc-and-postgresql-849fc7811135
@@ -112,6 +113,10 @@ spring:
 - URL : https://heesutory.tistory.com/35
   - Lombok의 @Builder 대신 kotlin으로 해결(URL : https://levelup.gitconnected.com/kotlin-makes-lombok-obsolete-9ed3318596cb, https://stackoverflow.com/questions/36140791/how-to-implement-builder-pattern-in-kotlin)
 - URL : https://binux.tistory.com/156
+- URL : https://medium.com/pictet-technologies-blog/reactive-programming-with-spring-data-r2dbc-ee9f1c24848b
+  - Combinations of repo query to make join relations 
+- URL ; https://www.sipios.com/blog-tech/handle-the-new-r2dbc-specification-in-java
+  - Raw query join and aggregate cause blocking issue
 
 #### 코루틴 적용하는 법(코루틴 도입배경) (Apply Kotlin coroutine in spring server)
 - URL : https://techblog.woowahan.com/7349/

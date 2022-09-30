@@ -20,7 +20,6 @@ import org.springframework.stereotype.Repository
 class UserRepository {
     @Autowired
     private lateinit var databaseClient: DatabaseClient
-
     @Autowired
     private lateinit var userMapper: UserMapper
 

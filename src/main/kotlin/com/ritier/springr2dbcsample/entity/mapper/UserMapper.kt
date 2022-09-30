@@ -11,17 +11,19 @@ import kotlin.reflect.typeOf
 
 @Component
 class UserMapper : BiFunction<Row, RowMetadata, User> {
-    override fun apply(row: Row, rowMetadata: RowMetadata): User = User(
-        id = row.get("user_id")!!.toString().toLong(),
-        nickname = row.get("nickname", String::class.java)!!,
-        age = row.get("age")!!.toString().toInt(),
-        profileImgId = row.get("profile_img_id")!!.toString().toLong(),
-        profileImg = Image(
-            id = row.get("image_id")!!.toString().toLong(),
-            url = row.get("url", String::class.java)!!,
-            width = row.get("width")!!.toString().toInt(),
-            height = row.get("height")!!.toString().toInt(),
-            createdAt = row.get("created_at", String::class.java)!!,
+    override fun apply(row: Row, metadata: RowMetadata): User {
+        return User(
+            id = row.get("user_id")!!.toString().toLong(),
+            nickname = row.get("nickname", String::class.java)!!,
+            age = row.get("age")!!.toString().toInt(),
+            profileImgId = row.get("profile_img_id")!!.toString().toLong(),
+            profileImg = Image(
+                id = row.get("image_id")!!.toString().toLong(),
+                url = row.get("url", String::class.java)!!,
+                width = row.get("width")!!.toString().toInt(),
+                height = row.get("height")!!.toString().toInt(),
+                createdAt = row.get("created_at", String::class.java)!!,
+            )
         )
-    )
+    }
 }

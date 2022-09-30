@@ -1,6 +1,7 @@
 package com.ritier.springr2dbcsample.router
 
 import com.ritier.springr2dbcsample.handler.ImageHandler
+import com.ritier.springr2dbcsample.handler.PostingHandler
 import com.ritier.springr2dbcsample.handler.UserHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
@@ -8,8 +9,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.http.MediaType.MULTIPART_FORM_DATA
 import org.springframework.web.reactive.function.server.*
-import org.springframework.web.reactive.function.server.RequestPredicates.*
-import org.springframework.web.reactive.function.server.RouterFunctions.route
 
 
 @Configuration
@@ -20,6 +19,9 @@ class RouterConfig {
 
     @Autowired
     private lateinit var imageHandler: ImageHandler
+
+    @Autowired
+    private lateinit var postingHandler: PostingHandler
 
     @Bean
     fun apiRouter(): RouterFunction<ServerResponse> {
@@ -35,6 +37,9 @@ class RouterConfig {
                 }
                 "/image".nest {
                     POST("", accept(MULTIPART_FORM_DATA)) { imageHandler.uploadImages(it) }
+                }
+                (accept(APPLICATION_JSON) and "/posting").nest {
+                    GET("") { postingHandler.getAllPostings(it) }
                 }
             }
         }

@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.env.Environment
 import org.springframework.http.codec.multipart.FilePart
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -26,7 +27,7 @@ import javax.imageio.ImageIO
 import javax.imageio.stream.MemoryCacheImageInputStream
 
 
-@Component
+@Service
 class ImageService {
 
     @Autowired
