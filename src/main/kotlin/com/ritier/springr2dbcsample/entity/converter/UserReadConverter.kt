@@ -1,17 +1,16 @@
-package com.ritier.springr2dbcsample.entity.mapper
+package com.ritier.springr2dbcsample.entity.converter
 
 import com.ritier.springr2dbcsample.entity.Image
 import com.ritier.springr2dbcsample.entity.User
 import io.r2dbc.spi.Row
-import io.r2dbc.spi.RowMetadata
+import org.springframework.core.convert.converter.Converter
+import org.springframework.data.convert.ReadingConverter
 import org.springframework.stereotype.Component
-import java.sql.Date
-import java.util.function.BiFunction
-import kotlin.reflect.typeOf
 
 @Component
-class UserMapper : BiFunction<Row, RowMetadata, User> {
-    override fun apply(row: Row, metadata: RowMetadata): User {
+@ReadingConverter
+class UserReadConverter : Converter<Row, User> {
+    override fun convert(row: Row): User {
         return User(
             id = row.get("user_id")!!.toString().toLong(),
             nickname = row.get("nickname", String::class.java)!!,

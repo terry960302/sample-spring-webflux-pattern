@@ -11,16 +11,25 @@
 - reactive 패턴은 이전에 rxdart로 질리도록 해봐서 재밌을거라 생각했다.(I get used to reactive pattern because used rxdart in other company for making flutter app.)
 
 ## Issues
-: Found out some issues during making and learning from Webflux pattern project. 
+: Found out some issues during making Webflux pattern project. 
 
 ### About Webflux `Reactor pattern`
 1. Reactor pattern(using Mono, Flux) can reduce code readability.(callback hell like  before async/await pattern popped out in Node.js) 
   - Resolved by using `kotlin coroutine`.(persist non-blocking)
 
 ### About `R2DBC`
-1. It's not an ORM(should write raw query and mapper in some cases)
+1. It's not an ORM(need to write raw query and mapper in some cases)
 2. Recommend to use R2DBC because of blocking issue when using JDBC(it's blocking API) instead.
    - Could not take advantage of confidence when using JPA.
+3. R2DBC does not support relation mapping like ORM (No plan for it)
+   ![image](https://user-images.githubusercontent.com/37768791/193259695-01a3ad7f-86e3-4dd5-a6da-7e892c36a013.png)
+4. Performance issues when using Postgresql driver compared to JDBC
+   - ref : https://github.com/spring-projects/spring-data-r2dbc/issues/203
+   ![image](https://user-images.githubusercontent.com/37768791/193275900-56b36a90-3b84-4b6b-b949-4cbb22c508dc.png)
+5. Pagination with sort and offset need to use databaseClient(raw query). It won't work using @Query annotation
+   - ref: https://github.com/spring-projects/spring-data-r2dbc/issues/596
+   ![image](https://user-images.githubusercontent.com/37768791/193278481-6bdd70a1-70d8-440b-b256-cc546c12d19f.png)
+
 
 ## Introduction
 
@@ -38,7 +47,7 @@
 ### Description(feat.예정된 작업)
 - [x] 관계 테이블 커스텀 쿼리 적용
 - [x] kotlin coroutine 적용(코드 가독성을 위해)~~
-- [ ] R2DBC OneToMany, OneToOne, ManyToMany mapping 적용
+- [x] R2DBC OneToMany, OneToOne, ManyToMany mapping 적용
 - [x] 로깅 적용(logging)
 - [x] 클라우드 저장소 이미지 파일 업로드
   - [ ] ISSUE > 8MB 이상 파일 업로드시 inputStream 데이터 비는 현상 개선

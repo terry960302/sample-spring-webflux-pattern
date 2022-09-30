@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.core.env.Environment
 import org.springframework.core.io.ClassPathResource
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration
-import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
 import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer
 import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
 import org.springframework.r2dbc.core.DatabaseClient
@@ -45,7 +44,7 @@ class DataSourceR2dbcConfig: AbstractR2dbcConfiguration() {
         val initializer = ConnectionFactoryInitializer()
         val resourceDatabasePopulator = ResourceDatabasePopulator()
         resourceDatabasePopulator.addScript(ClassPathResource("createSchema.sql"))
-        resourceDatabasePopulator.addScript(ClassPathResource("insertSchema.sql")) // 중복된 데이터 쌓이는 거 방지를 위해 주석
+//        resourceDatabasePopulator.addScript(ClassPathResource("insertSchema.sql")) // 중복된 데이터 쌓이는 거 방지를 위해 주석
         initializer.setConnectionFactory(connectionFactory())
         initializer.setDatabasePopulator(resourceDatabasePopulator)
         return initializer

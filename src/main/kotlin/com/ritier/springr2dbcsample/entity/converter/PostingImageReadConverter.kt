@@ -1,15 +1,16 @@
-package com.ritier.springr2dbcsample.entity.mapper
+package com.ritier.springr2dbcsample.entity.converter
 
 import com.ritier.springr2dbcsample.entity.Image
 import com.ritier.springr2dbcsample.entity.PostingImage
 import io.r2dbc.spi.Row
-import io.r2dbc.spi.RowMetadata
+import org.springframework.core.convert.converter.Converter
+import org.springframework.data.convert.ReadingConverter
 import org.springframework.stereotype.Component
-import java.util.function.BiFunction
 
 @Component
-class PostingImageMapper : BiFunction<Row, RowMetadata, PostingImage> {
-    override fun apply(row: Row, metadata: RowMetadata): PostingImage {
+@ReadingConverter
+class PostingImageReadConverter : Converter<Row, PostingImage> {
+    override fun convert(row: Row): PostingImage {
         return PostingImage(
             id = row.get("posting_image_id").toString().toLong(),
             postingId = row.get("posting_id").toString().toLong(),

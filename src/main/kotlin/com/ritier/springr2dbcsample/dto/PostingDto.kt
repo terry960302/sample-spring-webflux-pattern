@@ -12,21 +12,19 @@ data class PostingDto(
     val id: Long,
     val contents: String,
     val createdAt: LocalDateTime,
-    val userId: Long,
     val user: User?,
-    val images: List<Image>?,
-    val comments: List<Comment>?,
+    val images: List<ImageDto>?,
+    val comments: List<CommentDto>?,
 ) {
     companion object Mapper {
         fun from(posting: Posting): PostingDto {
             return PostingDto(
                 id = posting.id,
-                userId = posting.userId,
                 user = posting.user,
                 contents = posting.contents,
                 createdAt = posting.createdAt,
-                images = posting.images,
-                comments = posting.comments,
+                images = posting.images?.map { ImageDto.from(it) },
+                comments = posting.comments?.map { CommentDto.from(it) },
             )
         }
     }
@@ -35,11 +33,11 @@ data class PostingDto(
 fun PostingDto.toEntity(): Posting {
     return Posting(
         id = this.id,
-        userId = this.userId,
+        userId = this.user!!.id,
         user = this.user,
         contents = this.contents,
         createdAt = this.createdAt,
-        images = this.images,
-        comments = this.comments,
+        images = this.images?.map { it.toEntity() },
+        comments = this.comments?.map { it.toEntity() },
     )
 }

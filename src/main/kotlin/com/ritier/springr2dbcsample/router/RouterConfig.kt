@@ -27,7 +27,7 @@ class RouterConfig {
     fun apiRouter(): RouterFunction<ServerResponse> {
         return coRouter {
             "/api".nest {
-                (accept(APPLICATION_JSON) and "/user").nest {
+                (accept(APPLICATION_JSON) and "/users").nest {
                     GET("/{id}") { userHandler.getUserById(it) }
                     GET("") { userHandler.getUsers(it) }
                     GET("", queryParam("nickname") { _: String? -> true }) { userHandler.getUsers(it) }
@@ -35,10 +35,10 @@ class RouterConfig {
                     PUT("/{id}") { userHandler.updateUser(it) }
                     DELETE("/{id}") { userHandler.deleteUser(it) }
                 }
-                "/image".nest {
+                "/images".nest {
                     POST("", accept(MULTIPART_FORM_DATA)) { imageHandler.uploadImages(it) }
                 }
-                (accept(APPLICATION_JSON) and "/posting").nest {
+                (accept(APPLICATION_JSON) and "/postings").nest {
                     GET("") { postingHandler.getAllPostings(it) }
                 }
             }

@@ -24,7 +24,7 @@ class PostingService {
 
     suspend fun findAll(): Flow<PostingDto> = postingRepository.findAll().asFlow().map(this::loadRelations)
 
-    // TODO: non-blocking과 관리용이성을 보장하면서 성능을 개선하는 방법을 보완할 필요
+    // TODO: non-blocking 과 관리용이성을 보장하면서 성능을 개선하는 방법을 보완할 필요
     suspend fun loadRelations(posting: Posting): PostingDto = withContext(Dispatchers.IO) {
         val deferredUser = async { userRepository.findById(posting.userId) }
         val deferredImages = async { postingImageRepository.findPostingImagesByPostingId(posting.id) }

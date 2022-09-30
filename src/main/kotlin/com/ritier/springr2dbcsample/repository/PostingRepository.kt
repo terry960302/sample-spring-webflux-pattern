@@ -1,14 +1,7 @@
 package com.ritier.springr2dbcsample.repository
 
 import com.ritier.springr2dbcsample.entity.Posting
-import com.ritier.springr2dbcsample.entity.mapper.PostingMapper
-import io.r2dbc.spi.Row
-import kotlinx.coroutines.flow.Flow
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
-import org.springframework.r2dbc.core.DatabaseClient
-import org.springframework.r2dbc.core.awaitOne
-import org.springframework.r2dbc.core.flow
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -17,7 +10,7 @@ interface PostingRepository : ReactiveCrudRepository<Posting, Long> {
 
 // blocking issue 떄문에 join 후 aggregate 는 보류
 //@Repository
-//class PostingRepository {
+//class PostingCustomRepository {
 //
 //    @Autowired
 //    private lateinit var databaseClient: DatabaseClient
@@ -44,8 +37,38 @@ interface PostingRepository : ReactiveCrudRepository<Posting, Long> {
 //                    "c.created_at as comment_created_at" +
 //                    "FROM postings AS p" +
 //                    "INNER JOIN users AS u ON u.user_id = p.posting_id" +
+//                    "LEFT JOIN images AS i ON " +
 //                    "INNER JOIN posting_images AS pi ON pi.posting_id = p.posting_id" +
 //                    "INNER JOIN images AS i ON i.image_id = pi.image_id" +
 //                    "INNER JOIN posting_comments AS c ON c.posting_id = p.posting_id"
-//        ).fetch().all().bufferUntilChanged<String>{ it["posting_id"].toString() }.map{it -> it.}.flow()
+//        ).fetch().all().bufferUntilChanged<String> { it["posting_id"].toString() }.map { mapping(it) }.asFlow()
+//
+//    fun mapping(list: List<Map<String, *>>): Posting {
+//        val postingMap = list[0]
+//        val posting = Posting(
+//            id = postingMap["posting_id"].toString().toLong(),
+//            contents = postingMap["posting_contents"].toString(),
+//            createdAt = Converter.convertStrToLocalDateTime(postingMap["posting_created_at"].toString()),
+//            userId = postingMap["user_id"].toString().toLong(),
+//            user = User(
+//                id = postingMap["user_id"].toString().toLong(),
+//                nickname = postingMap["user_nickname"].toString(),
+//                age = postingMap["user_age"].toString().toInt(),
+//                profileImgId = if(postingMap["user_profile_img_id"] == null) null else postingMap["user_profile_img_id"].toString().toLong(),
+//                profileImg = null
+//            ),
+//            comments = listOf(),
+//            images = listOf(),
+//        )
+//
+//        val comments = list.stream().map {
+//            Comment(
+//                id = it["comment_id"].toString().toLong(),
+//                contents = it["comment_contents"].toString(),
+//                createdAt = Converter.convertStrToLocalDateTime(it["comment_created_at"].toString()),
+//                userId =
+//            )
+//        }
+//        return
+//    }
 //}
