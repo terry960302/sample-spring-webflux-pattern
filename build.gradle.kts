@@ -27,6 +27,11 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
 
+	// kotest
+	testImplementation("io.kotest:kotest-runner-junit5:$version")
+	testImplementation("io.kotest:kotest-assertions-core:$version")
+	testImplementation("io.kotest:kotest-property:$version")
+
 	// r2dbc for postgresql
 	implementation("io.r2dbc:r2dbc-postgresql:0.8.13.RELEASE")
 	implementation("org.springframework.data:spring-data-jdbc:2.4.3")
@@ -48,7 +53,11 @@ tasks.withType<KotlinCompile> {
 		jvmTarget = "17"
 	}
 }
+//
+//tasks.withType<Test> {
+//	useJUnitPlatform()
+//}
 
-tasks.withType<Test> {
+tasks.withType<Test>().configureEach {
 	useJUnitPlatform()
 }

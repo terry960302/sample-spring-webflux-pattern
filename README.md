@@ -148,3 +148,6 @@ spring:
 - URL : https://hantsy.github.io/spring-puzzles/hibernate-reactive.html
 - URL : https://hibernate.org/reactive/
 - URL : https://itnext.io/integrating-hibernate-reactive-with-spring-5427440607fe
+
+#### kotest examples(with Webflux)
+- URL : https://github.com/kotest/kotest-examples-spring-webflux
