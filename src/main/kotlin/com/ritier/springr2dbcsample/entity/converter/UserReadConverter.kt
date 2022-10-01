@@ -2,6 +2,7 @@ package com.ritier.springr2dbcsample.entity.converter
 
 import com.ritier.springr2dbcsample.entity.Image
 import com.ritier.springr2dbcsample.entity.User
+import com.ritier.springr2dbcsample.util.ConverterUtil
 import io.r2dbc.spi.Row
 import org.springframework.core.convert.converter.Converter
 import org.springframework.data.convert.ReadingConverter
@@ -21,7 +22,7 @@ class UserReadConverter : Converter<Row, User> {
                 url = row.get("url", String::class.java)!!,
                 width = row.get("width")!!.toString().toInt(),
                 height = row.get("height")!!.toString().toInt(),
-                createdAt = row.get("created_at", String::class.java)!!,
+                createdAt = ConverterUtil.convertStrToLocalDateTime(row.get("created_at", String::class.java)!!),
             )
         )
     }

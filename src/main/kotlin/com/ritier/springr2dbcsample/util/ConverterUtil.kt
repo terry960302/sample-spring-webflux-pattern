@@ -5,10 +5,10 @@ import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class Converter {
+class ConverterUtil {
     companion object {
         fun convertStrToLocalDateTime(time: String): LocalDateTime {
-            val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+            val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.nnnnnn")
             return LocalDateTime.parse(time, formatter)
         }
 

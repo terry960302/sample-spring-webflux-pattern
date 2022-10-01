@@ -21,7 +21,13 @@ data class Posting(
     @Transient var comments: List<Comment>?,
 ) {
     override fun toString(): String {
-        return "Posting { id : $id, userId : $userId, user : ${user.toString()}, contents : $contents, images : ${images.toString()} createdAt : $createdAt }"
+        return "Posting { " +
+                "id : $id, userId : $userId, " +
+                "user : ${user.toString()}, " +
+                "contents : $contents, " +
+                "images : ${images?.map { it.toString() }}, " +
+                "comments : ${comments?.map { it.toString() }}" +
+                "createdAt : $createdAt }"
     }
 }
 

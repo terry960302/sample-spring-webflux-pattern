@@ -22,14 +22,15 @@
 2. Recommend to use R2DBC because of blocking issue when using JDBC(it's blocking API) instead.
    - Could not take advantage of confidence when using JPA.
 3. R2DBC does not support relation mapping like ORM (No plan for it)
-   ![image](https://user-images.githubusercontent.com/37768791/193259695-01a3ad7f-86e3-4dd5-a6da-7e892c36a013.png)
+     ![image](https://user-images.githubusercontent.com/37768791/193259695-01a3ad7f-86e3-4dd5-a6da-7e892c36a013.png)
 4. Performance issues when using Postgresql driver compared to JDBC
    - ref : https://github.com/spring-projects/spring-data-r2dbc/issues/203
-   ![image](https://user-images.githubusercontent.com/37768791/193275900-56b36a90-3b84-4b6b-b949-4cbb22c508dc.png)
-5. Pagination with sort and offset need to use databaseClient(raw query). It won't work using @Query annotation
+     ![image](https://user-images.githubusercontent.com/37768791/193275900-56b36a90-3b84-4b6b-b949-4cbb22c508dc.png)
+5. ~~Pagination with sort and offset need to use databaseClient(raw query). It won't work with @Query annotation.~~
    - ref: https://github.com/spring-projects/spring-data-r2dbc/issues/596
-   ![image](https://user-images.githubusercontent.com/37768791/193278481-6bdd70a1-70d8-440b-b256-cc546c12d19f.png)
-
+     ![image](https://user-images.githubusercontent.com/37768791/193278481-6bdd70a1-70d8-440b-b256-cc546c12d19f.png)
+   - Resolved by Fluent API in R2DBC.(can put sort or offset stuffs using Fluent API template.)
+6. There's other relation mapping support(alternatives) on reactive db connection API which called `Hibernate Reactive`(can use with Hibernate ORM) and `Kotlin JDSL Reactive`
 
 ## Introduction
 
@@ -41,13 +42,13 @@
 - `Webflux` 패턴 채택
 - `함수형(Functional)` 프로그래밍 적용
 - `Postgresql` driver 사용(원래는 mysql이 익숙한데 tokenizing때문에 postgresql을 공부하기로 맘먹음)
-- 논블로킹을 위해 JPA가 아닌 `R2DBC` 채택
+- 논블로킹을 위해 JPA가 아닌 `R2DBC` 채택 (ORM이 아니라서 고민중)
 - 클라우드는 `GCP`를 사용 for file upload
 
 ### Description(feat.예정된 작업)
 - [x] 관계 테이블 커스텀 쿼리 적용
-- [x] kotlin coroutine 적용(코드 가독성을 위해)~~
-- [x] R2DBC OneToMany, OneToOne, ManyToMany mapping 적용
+- [x] kotlin coroutine 적용(코드 가독성을 위해)
+- [x] R2DBC OneToMany, OneToOne, ManyToMany mapping 적용(속도 저하 이슈로 로우쿼리로 전환)
 - [x] 로깅 적용(logging)
 - [x] 클라우드 저장소 이미지 파일 업로드
   - [ ] ISSUE > 8MB 이상 파일 업로드시 inputStream 데이터 비는 현상 개선
@@ -124,7 +125,7 @@ spring:
 - URL : https://binux.tistory.com/156
 - URL : https://medium.com/pictet-technologies-blog/reactive-programming-with-spring-data-r2dbc-ee9f1c24848b
   - Combinations of repo query to make join relations 
-- URL ; https://www.sipios.com/blog-tech/handle-the-new-r2dbc-specification-in-java
+- URL : https://www.sipios.com/blog-tech/handle-the-new-r2dbc-specification-in-java
   - Raw query join and aggregate cause blocking issue
 
 #### 코루틴 적용하는 법(코루틴 도입배경) (Apply Kotlin coroutine in spring server)
@@ -139,3 +140,11 @@ spring:
 #### Logger Setup
 - URL : https://jsonobject.tistory.com/500
 - URL : https://www.reddit.com/r/Kotlin/comments/8gbiul/slf4j_loggers_in_3_ways/
+
+#### R2DBC vs Hibernate Reactive
+- URL : https://medium.com/geekculture/spring-data-jpa-spring-data-r2dbc-hibernate-reactive-bcc43e321566
+
+#### Hibernate Reactive 사용법
+- URL : https://hantsy.github.io/spring-puzzles/hibernate-reactive.html
+- URL : https://hibernate.org/reactive/
+- URL : https://itnext.io/integrating-hibernate-reactive-with-spring-5427440607fe

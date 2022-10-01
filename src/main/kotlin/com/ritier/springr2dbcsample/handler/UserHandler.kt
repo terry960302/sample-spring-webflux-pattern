@@ -1,10 +1,13 @@
 package com.ritier.springr2dbcsample.handler
 
 import com.ritier.springr2dbcsample.dto.UserDto
+import com.ritier.springr2dbcsample.dto.common.CommonError
+import com.ritier.springr2dbcsample.dto.common.ErrorResponseDto
 import com.ritier.springr2dbcsample.entity.User
 import com.ritier.springr2dbcsample.service.UserService
 import kotlinx.coroutines.reactor.awaitSingle
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
 import org.springframework.http.MediaType.APPLICATION_JSON
@@ -26,7 +29,14 @@ class UserHandler {
             ServerResponse.ok().contentType(APPLICATION_JSON).bodyValueAndAwait(user)
         } catch (e: Error) {
             println("Error : ${e.message}")
-            ServerResponse.notFound().buildAndAwait()
+            val err = ErrorResponseDto(
+                error = CommonError(
+                    code = 500,
+                    message = e.message.toString(),
+                    type = "",
+                )
+            )
+            ServerResponse.status(500).contentType(MediaType.APPLICATION_JSON).bodyValueAndAwait(err)
         }
     }
 
@@ -38,7 +48,14 @@ class UserHandler {
             ServerResponse.ok().contentType(APPLICATION_JSON).bodyValueAndAwait(user)
         } catch (e: Error) {
             println("Error : ${e.message}")
-            ServerResponse.notFound().buildAndAwait()
+            val err = ErrorResponseDto(
+                error = CommonError(
+                    code = 500,
+                    message = e.message.toString(),
+                    type = "",
+                )
+            )
+            ServerResponse.status(500).contentType(MediaType.APPLICATION_JSON).bodyValueAndAwait(err)
         }
     }
 
@@ -49,7 +66,14 @@ class UserHandler {
             ServerResponse.ok().contentType(APPLICATION_JSON).bodyValueAndAwait(user)
         } catch (e: Error) {
             println("Error : ${e.message}")
-            ServerResponse.notFound().buildAndAwait()
+            val err = ErrorResponseDto(
+                error = CommonError(
+                    code = 500,
+                    message = e.message.toString(),
+                    type = "",
+                )
+            )
+            ServerResponse.status(500).contentType(MediaType.APPLICATION_JSON).bodyValueAndAwait(err)
         }
     }
 
@@ -65,7 +89,14 @@ class UserHandler {
             ServerResponse.ok().contentType(APPLICATION_JSON).bodyAndAwait(users)
         } catch (e: Error) {
             println("Error : ${e.message}")
-            ServerResponse.notFound().buildAndAwait()
+            val err = ErrorResponseDto(
+                error = CommonError(
+                    code = 500,
+                    message = e.message.toString(),
+                    type = "",
+                )
+            )
+            ServerResponse.status(500).contentType(MediaType.APPLICATION_JSON).bodyValueAndAwait(err)
         }
     }
 
@@ -76,7 +107,14 @@ class UserHandler {
             ServerResponse.ok().contentType(APPLICATION_JSON).bodyValueAndAwait(user)
         } catch (e: Error) {
             println("Error : ${e.message}")
-            ServerResponse.notFound().buildAndAwait()
+            val err = ErrorResponseDto(
+                error = CommonError(
+                    code = 500,
+                    message = e.message.toString(),
+                    type = "",
+                )
+            )
+            ServerResponse.status(500).contentType(MediaType.APPLICATION_JSON).bodyValueAndAwait(err)
         }
     }
 }

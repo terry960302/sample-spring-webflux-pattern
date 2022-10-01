@@ -40,6 +40,8 @@ class RouterConfig {
                 }
                 (accept(APPLICATION_JSON) and "/postings").nest {
                     GET("") { postingHandler.getAllPostings(it) }
+                    GET("/{id}") { postingHandler.getPosting(it) }
+                    GET("/{id}/comments") { postingHandler.getAllCommentsByPostingId(it) }
                 }
             }
         }

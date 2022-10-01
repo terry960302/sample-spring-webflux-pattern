@@ -17,7 +17,7 @@ class CommentReadConverter : Converter<Row, Comment>{
             postingId = row.get("posting_id").toString().toLong(),
 //            posting = postingMapper.apply(row, metadata),
             contents = row.get("contents").toString(),
-            createdAt = com.ritier.springr2dbcsample.util.Converter.convertStrToLocalDateTime(row.get("created_at").toString()),
+            createdAt = com.ritier.springr2dbcsample.util.ConverterUtil.convertStrToLocalDateTime(row.get("created_at").toString()),
         )
     }
 }

@@ -1,5 +1,7 @@
 package com.ritier.springr2dbcsample.handler
 
+import com.ritier.springr2dbcsample.dto.common.CommonError
+import com.ritier.springr2dbcsample.dto.common.ErrorResponseDto
 import com.ritier.springr2dbcsample.service.ImageService
 import kotlinx.coroutines.*
 import kotlinx.coroutines.reactor.awaitSingle
@@ -11,6 +13,7 @@ import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.buildAndAwait
 import org.apache.logging.log4j.LogManager
+import org.springframework.web.reactive.function.server.bodyValueAndAwait
 
 @Component
 class ImageHandler {
@@ -42,8 +45,14 @@ class ImageHandler {
             ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(urls).awaitSingle()
         } catch (e: Error) {
             log.error("Error : ${e.message}")
-            ServerResponse.notFound().buildAndAwait()
-        }
+            val err = ErrorResponseDto(
+                error = CommonError(
+                    code = 500,
+                    message = e.message.toString(),
+                    type = "",
+                )
+            )
+            ServerResponse.status(500).contentType(MediaType.APPLICATION_JSON).bodyValueAndAwait(err)        }
     }
 
 }

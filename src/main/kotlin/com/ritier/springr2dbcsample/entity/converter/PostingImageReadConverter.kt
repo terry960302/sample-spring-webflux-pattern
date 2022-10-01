@@ -20,7 +20,7 @@ class PostingImageReadConverter : Converter<Row, PostingImage> {
                 width = row.get("width").toString().toInt(),
                 height = row.get("height").toString().toInt(),
                 url = row.get("url").toString(),
-                createdAt = row.get("created_at").toString(),
+                createdAt = com.ritier.springr2dbcsample.util.ConverterUtil.convertStrToLocalDateTime(row.get("created_at").toString()),
             ),
             posting = null,
         )
