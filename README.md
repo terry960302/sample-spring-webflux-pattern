@@ -8,7 +8,7 @@
 - 개인 포트폴리오가 전부 상업용 프로젝트이기도 하고 백엔드 관련한 개인적인 repo가 충분하지 않았다.(My portfolio is full of commercial projects that cannot show to others. so tried to make public one)
 - 개인적으로 만들고 있는 프로젝트(InteractiveERD)에서 백엔드를 뭘로 할지 고민을 하고 있었다.(Need to select proper backend language and frameworks to be used in my private projects which named 'InteractiveERD')
 - 지인중 한 분이 본인 팀에서 Spring Webflux를 사용한다고 하길래 트랜드인가 싶어 익숙한 kotlin으로 공부해보면 좋겠다는 생각이 들었다.(옷은 트랜드를 안 따라가더라도 프로그래밍은 못참지)(Some of my X co-worker told me that Spring Webflux pattern used in IT major company in these days. so tried to study this pattern for catching up with IT trends for fun.)
-- reactive 패턴은 이전에 rxdart로 질리도록 해봐서 재밌을거라 생각했다.(I get used to reactive pattern because used rxdart in other company for making flutter app.)
+- reactive 패턴은 이전에 rxdart로 질리도록 해봐서 재밌을거라 생각했다.(I get used to reactive pattern because used rxdart before in other company to make flutter app.)
 
 ## Issues
 : Found out some issues during making Webflux pattern project. 
