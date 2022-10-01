@@ -8,7 +8,9 @@ import java.time.format.DateTimeFormatter
 class ConverterUtil {
     companion object {
         fun convertStrToLocalDateTime(time: String): LocalDateTime {
-            val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.nnnnnn")
+           val isFromRawQuery = time.contains("T")
+
+            val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern(if(isFromRawQuery) "yyyy-MM-dd'T'HH:mm:ss.nnnnnn" else  "yyyy-MM-dd HH:mm:ss.nnnnn")
             return LocalDateTime.parse(time, formatter)
         }
 
