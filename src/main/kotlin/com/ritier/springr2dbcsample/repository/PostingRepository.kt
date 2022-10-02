@@ -90,9 +90,10 @@ class PostingCustomRepository {
             .map { convertRowListToPostingEntity(it) }.take(1).awaitLast()
     }
 
-    suspend fun findAll(): Flow<Posting> = databaseClient.sql(fetchAllPostingsQuery).fetch().all().validatePostingList()
+    suspend fun findAll(): Flow<Posting> =
+        databaseClient.sql(fetchAllPostingsQuery).fetch().all().processPostingsRawData()
 
-    fun Flux<Map<String, *>>.validatePostingList(): Flow<Posting> {
+    fun Flux<Map<String, *>>.processPostingsRawData(): Flow<Posting> {
         if (this.count().equals(0)) return Flux.empty<Posting>().asFlow()
         return this.bufferUntilChanged<String> { it["posting_id"].toString() }.map { convertRowListToPostingEntity(it) }
             .asFlow()
