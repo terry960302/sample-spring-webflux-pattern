@@ -10,12 +10,6 @@ import org.springframework.r2dbc.core.awaitOne
 import org.springframework.r2dbc.core.flow
 import org.springframework.stereotype.Repository
 
-
-// 관계매핑이 필요한 경우라면 굳이 필요없음.
-//interface UserRepositoryDao : ReactiveCrudRepository<User, Long> {
-//    fun findByNickname(nickname: String): Flux<User>
-//}
-
 @Repository
 class UserRepository {
     @Autowired

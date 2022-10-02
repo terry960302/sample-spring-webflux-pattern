@@ -9,10 +9,11 @@ import java.time.LocalDateTime
 data class CommentDto(
     val id: Long,
     val userId: Long,
+    val user: UserDto?,
     val postingId: Long,
     val contents: String,
     val createdAt: LocalDateTime,
-){
+) {
     companion object Mapper {
         fun from(comment: Comment): CommentDto {
             return CommentDto(
@@ -21,6 +22,7 @@ data class CommentDto(
                 postingId = comment.postingId,
                 contents = comment.contents,
                 createdAt = comment.createdAt,
+                user = if (comment.user == null) null else UserDto.from(comment.user!!)
             )
         }
     }
@@ -33,5 +35,6 @@ fun CommentDto.toEntity(): Comment {
         postingId = this.postingId,
         contents = this.contents,
         createdAt = this.createdAt,
+        user = this.user?.toEntity(),
     )
 }

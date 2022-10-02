@@ -17,12 +17,10 @@ data class Comment(
     @Column("contents") val contents : String,
     @CreatedDate
     @Column("created_at") val createdAt: LocalDateTime,
-//    @Transient
-//    val user : User?,
-//    @Transient
-//    val posting : Posting?,
+    @Transient
+    var user : User?,
 ) {
     override fun toString(): String {
-        return "Comment { id : $id, userId : ${userId.toString()}, contents : $contents, postingId : ${postingId.toString()} }"
+        return "Comment { id : $id, userId : $userId, user : ${user.toString()} contents : $contents, postingId : ${postingId.toString()} }"
     }
 }

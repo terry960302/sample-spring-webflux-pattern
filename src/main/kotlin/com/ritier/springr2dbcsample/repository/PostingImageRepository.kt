@@ -15,7 +15,6 @@ class PostingImageRepository {
     private lateinit var databaseClient: DatabaseClient
 
     @Autowired
-//    private lateinit var postingImageMapper: PostingImageMapper
     private lateinit var postingImageReadConverter: PostingImageReadConverter
     suspend fun findPostingImagesByPostingId(postingId: Long): Flow<PostingImage> =
         databaseClient.sql("SELECT * FROM posting_images as pi JOIN images as i ON i.image_id = pi.image_id WHERE pi.posting_id = :postingId")
