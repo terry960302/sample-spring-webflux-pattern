@@ -5,6 +5,7 @@ import com.ritier.springr2dbcsample.entity.Posting
 import com.ritier.springr2dbcsample.entity.User
 import com.ritier.springr2dbcsample.util.ConverterUtil
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.withIndex
 import kotlinx.coroutines.reactive.*
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,6 +13,9 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository
 import org.springframework.r2dbc.core.DatabaseClient
 import org.springframework.r2dbc.core.flow
 import org.springframework.stereotype.Repository
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
+import java.util.*
 import java.util.stream.Collectors
 
 @Repository
@@ -26,7 +30,7 @@ class PostingCustomRepository {
     private lateinit var databaseClient: DatabaseClient
 
     // Fetch user with profile img data(nullable)
-    private val userQuery = "SELECT " +
+    private val fetchUserQuery = "SELECT " +
             "u.user_id as user_id," +
             "u.nickname as user_nickname," +
             "u.age as user_age," +
@@ -39,7 +43,7 @@ class PostingCustomRepository {
             "LEFT JOIN images AS i ON i.image_id = u.profile_img_id"
 
     // Fetch All postings with posting_user(with profileImg metadata) and posting_images(list)
-    private val postingsQuery = "SELECT " +
+    private val fetchAllPostingsQuery = "SELECT " +
             "u.*," +
             "p.posting_id," +
             "p.contents AS posting_contents," +
@@ -50,14 +54,16 @@ class PostingCustomRepository {
             "i.height AS posting_img_height," +
             "i.created_at AS posting_img_created_at " +
             "FROM postings AS p " +
-            "INNER JOIN (" +
-            userQuery +
-            ") AS u ON u.user_id = p.user_id " +
+            "INNER JOIN ($fetchUserQuery) AS u ON u.user_id = p.user_id " +
             "INNER JOIN posting_images AS pi ON pi.posting_id = p.posting_id " +
             "INNER JOIN images AS i ON pi.image_id = i.image_id"
 
-    // Fetch Single posting by using `sub query` instead of using `WHERE` clause at end of postingsQuery variable for performance
-    private val postingQuery =
+    // Do count query before fetch single posting data for handling Null error process like most ORMs did
+    private val countPostingQuery =
+        "SELECT COUNT(*) FROM postings WHERE posting_id = :postingId"
+
+    // Fetch Single posting by using `Sub query` instead of using `WHERE` clause at end of postingsQuery variable for performance
+    private val fetchPostingQuery =
         "SELECT\n" +
                 "u.*,\n" +
                 "p.posting_id,\n" +
@@ -69,25 +75,28 @@ class PostingCustomRepository {
                 "i.height AS posting_img_height,\n" +
                 "i.created_at AS posting_img_created_at\n" +
                 "FROM (SELECT * FROM postings WHERE posting_id = :postingId) AS p \n" +
-                "INNER JOIN ($userQuery) AS u ON u.user_id = p.user_id \n" +
+                "INNER JOIN ($fetchUserQuery) AS u ON u.user_id = p.user_id \n" +
                 "INNER JOIN posting_images AS pi ON pi.posting_id = p.posting_id \n" +
                 "INNER JOIN images AS i ON pi.image_id = i.image_id"
 
     suspend fun findById(postingId: Long): Posting? {
-        val countPostingQuery =
-            "SELECT COUNT(*) FROM postings WHERE posting_id = :postingId"
+
         val count = databaseClient.sql(countPostingQuery).bind("postingId", postingId).fetch().one()
             .awaitLast()["count"].toString().toInt()
         if (count <= 0) return null
 
-        return databaseClient.sql(postingQuery).bind("postingId", postingId).fetch().all()
+        return databaseClient.sql(fetchPostingQuery).bind("postingId", postingId).fetch().all()
             .bufferUntilChanged<String> { it["posting_id"].toString() }
-            .map { convertRowListToPostingEntity(it) }.take(1).awaitFirstOrNull()
+            .map { convertRowListToPostingEntity(it) }.take(1).awaitLast()
     }
 
-    suspend fun findAll(): Flow<Posting> =
-        databaseClient.sql(postingsQuery).fetch().all().bufferUntilChanged<String> { it["posting_id"].toString() }
-            .map { convertRowListToPostingEntity(it) }.asFlow()
+    suspend fun findAll(): Flow<Posting> = databaseClient.sql(fetchAllPostingsQuery).fetch().all().validatePostingList()
+
+    fun Flux<Map<String, *>>.validatePostingList(): Flow<Posting> {
+        if (this.count().equals(0)) return Flux.empty<Posting>().asFlow()
+        return this.bufferUntilChanged<String> { it["posting_id"].toString() }.map { convertRowListToPostingEntity(it) }
+            .asFlow()
+    }
 
     fun convertRowListToPostingEntity(list: List<Map<String, *>>): Posting {
         val postingMap = list[0]
