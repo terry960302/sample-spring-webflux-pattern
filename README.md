@@ -61,6 +61,7 @@
 ## Get Started!
 ### Environment(yml) Setup
 : `application.yaml` 파일을 .gitignore 처리를 했지만 아래와 같이 적으면 문제 없이 실행할 수 있습니다. 혹시나 다른 데이터베이스 드라이버를 사용하시는 경우라면 datasource파일 및 gradle을 수정할 필요가 있습니다.
+
 ```yml
 # src/main/resources/application.yaml
 spring:
@@ -80,6 +81,14 @@ spring:
     cred-path: <YOUR CONFIG CREDENTIAL FILE PATH>
     project-id: <YOUR GCP STORAGE PROJECT ID>
     bucket-name: <YOUR GCP STORAGE BUCKET NAME>
+```
+### Profile Setup
+```bash
+# Itellij Configuration > VM option 
+-Dspring.profiles.active=<YOUR PROFILE>
+
+# Use Command line to run build jar file
+java -jar -Dspring.profiles.active=<YOUR PROFILE> path/to/app.jar
 ```
 
 ## References
