@@ -150,4 +150,7 @@ spring:
 - URL : https://itnext.io/integrating-hibernate-reactive-with-spring-5427440607fe
 
 #### kotest examples(with Webflux)
+: official docs가 아주 잘 되어있음.
 - URL : https://github.com/kotest/kotest-examples-spring-webflux
+- URL : https://velog.io/@revimal/Kotlin-Kotest%EC%99%80-MockK%EB%A1%9C-Spring-Boot%EC%97%90%EC%84%9C-Kotlin-%EC%8A%A4%ED%83%80%EC%9D%BC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1
+- URL : https://github.com/HomoEfficio/dev-tips/blob/master/Kotlin-Coroutine-Spring-WebFluxTest.md

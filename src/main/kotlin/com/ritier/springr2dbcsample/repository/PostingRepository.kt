@@ -24,10 +24,10 @@ interface PostingRepository : ReactiveCrudRepository<Posting, Long> {
 
 // blocking issue 떄문에 join 후 aggregate 는 보류
 @Repository
-class PostingCustomRepository {
+class PostingCustomRepository(val databaseClient: DatabaseClient) {
 
-    @Autowired
-    private lateinit var databaseClient: DatabaseClient
+//    @Autowired
+//    private lateinit var databaseClient: DatabaseClient
 
     // Fetch user with profile img data(nullable)
     private val fetchUserQuery = "SELECT " +

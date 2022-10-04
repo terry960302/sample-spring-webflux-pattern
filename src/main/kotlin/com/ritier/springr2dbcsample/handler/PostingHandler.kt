@@ -15,12 +15,12 @@ import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.*
 
 @Component
-class PostingHandler {
-    @Autowired
-    private lateinit var postingService: PostingService
-
-    @Autowired
-    private lateinit var commentService: CommentService
+class PostingHandler(val postingService: PostingService, val commentService: CommentService) {
+//    @Autowired
+//    private lateinit var postingService: PostingService
+//
+//    @Autowired
+//    private lateinit var commentService: CommentService
 
     suspend fun getPosting(request: ServerRequest): ServerResponse {
         val logger = LogManager.getLogger()
@@ -56,7 +56,8 @@ class PostingHandler {
                     type = "",
                 )
             )
-            ServerResponse.status(500).contentType(MediaType.APPLICATION_JSON).bodyValueAndAwait(err)        }
+            ServerResponse.status(500).contentType(MediaType.APPLICATION_JSON).bodyValueAndAwait(err)
+        }
     }
 
     suspend fun getAllCommentsByPostingId(request: ServerRequest): ServerResponse {
@@ -74,6 +75,7 @@ class PostingHandler {
                     type = "",
                 )
             )
-            ServerResponse.status(500).contentType(MediaType.APPLICATION_JSON).bodyValueAndAwait(err)        }
+            ServerResponse.status(500).contentType(MediaType.APPLICATION_JSON).bodyValueAndAwait(err)
+        }
     }
 }

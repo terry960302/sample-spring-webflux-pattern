@@ -12,7 +12,7 @@ data class PostingDto(
     val id: Long,
     val contents: String,
     val createdAt: LocalDateTime,
-    val user: User?,
+    val user: UserDto?,
     val images: List<ImageDto>?,
     val comments: List<CommentDto>?,
 ) {
@@ -20,7 +20,7 @@ data class PostingDto(
         fun from(posting: Posting): PostingDto {
             return PostingDto(
                 id = posting.id,
-                user = posting.user,
+                user = if (posting.user == null) null else UserDto.from(posting.user!!),
                 contents = posting.contents,
                 createdAt = posting.createdAt,
                 images = posting.images?.map { ImageDto.from(it) },
@@ -34,7 +34,7 @@ fun PostingDto.toEntity(): Posting {
     return Posting(
         id = this.id,
         userId = this.user!!.id,
-        user = this.user,
+        user = this.user.toEntity(),
         contents = this.contents,
         createdAt = this.createdAt,
         images = this.images?.map { it.toEntity() },

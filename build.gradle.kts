@@ -28,9 +28,13 @@ dependencies {
 	testImplementation("io.projectreactor:reactor-test")
 
 	// kotest
-	testImplementation("io.kotest:kotest-runner-junit5:$version")
-	testImplementation("io.kotest:kotest-assertions-core:$version")
-	testImplementation("io.kotest:kotest-property:$version")
+	testImplementation("io.kotest:kotest-runner-junit5:5.4.0")
+	testImplementation("io.kotest:kotest-assertions-core:5.4.0")
+	testImplementation("io.kotest:kotest-property:5.4.0")
+	testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.1")
+
+	// mockk(for mocking instances in test)
+	testImplementation("io.mockk:mockk:1.11.0")
 
 	// r2dbc for postgresql
 	implementation("io.r2dbc:r2dbc-postgresql:0.8.13.RELEASE")
@@ -53,7 +57,7 @@ tasks.withType<KotlinCompile> {
 		jvmTarget = "17"
 	}
 }
-//
+
 //tasks.withType<Test> {
 //	useJUnitPlatform()
 //}

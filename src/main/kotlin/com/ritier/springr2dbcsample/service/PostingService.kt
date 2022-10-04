@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class PostingService {
+class PostingService(val postingCustomRepository: PostingCustomRepository) {
 
 
-    @Autowired
-    private lateinit var postingCustomRepository: PostingCustomRepository
+//    @Autowired
+//    private lateinit var postingCustomRepository: PostingCustomRepository
 
 
     suspend fun findById(id: Long): PostingDto? =
