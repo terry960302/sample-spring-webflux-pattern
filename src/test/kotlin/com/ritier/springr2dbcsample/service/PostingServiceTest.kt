@@ -41,7 +41,6 @@ class PostingServiceTest : FunSpec() {
                     id = 1,
                     nickname = "terry",
                     age = 10,
-
                     profileImg = Image(
                         id = 1,
                         url = "Asdasd",
