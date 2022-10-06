@@ -10,7 +10,11 @@ RUN gradle clean build --no-daemon
 
 FROM openjdk:18 AS runner
 
-ARG JAR_FILE=/app/build/libs/*.jar
+ENV VERSION=0.0.1-SNAPSHOT
 ENV PROFILE=dev
-COPY --from=builder ["${JAR_FILE}", "./app.jar"]
+
+ARG FILENAME=spring-r2dbc-sample-${VERSION}
+ARG JAR_FILE=/app/build/libs/${FILENAME}.jar
+COPY --from=builder ${JAR_FILE} ./app.jar
+#ADD --from=builder ${JAR_FILE} ./app.jar
 ENTRYPOINT ["java","-jar", "-Dspring.profiles.active=${PROFILE}", "/app.jar"]
