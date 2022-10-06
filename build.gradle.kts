@@ -34,7 +34,7 @@ dependencies {
 	testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.1")
 
 	// mockk(for mocking instances in test)
-	testImplementation("io.mockk:mockk:1.11.0")
+	testImplementation("io.mockk:mockk:1.13.2")
 
 	// r2dbc for postgresql
 	implementation("io.r2dbc:r2dbc-postgresql:0.8.13.RELEASE")

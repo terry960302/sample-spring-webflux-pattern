@@ -15,4 +15,24 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build -f Dockerfile -t sample-spring-webflux:$(date +%s) .
+      run: docker build --no-cache -f Dockerfile -t sample-spring-webflux:$(date +%s) .
+
+#  deploy:
+#
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - id: 'auth'
+#        uses: 'google-github-actions/auth@v0'
+#        with:
+#          workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+#          service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
+#
+#      - id: 'deploy'
+#        uses: 'google-github-actions/deploy-cloudrun@v0'
+#        with:
+#          service: 'hello-cloud-run'
+#          image: 'gcr.io/cloudrun/hello'
+#
+#      - name: 'Use output'
+#        run: 'curl "${{ steps.deploy.outputs.url }}"'
