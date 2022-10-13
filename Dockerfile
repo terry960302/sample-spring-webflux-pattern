@@ -16,5 +16,4 @@ ENV PROFILE=dev
 ARG FILENAME=spring-r2dbc-sample-${VERSION}
 ARG JAR_FILE=/app/build/libs/${FILENAME}.jar
 COPY --from=builder ${JAR_FILE} ./app.jar
-#ADD --from=builder ${JAR_FILE} ./app.jar
 ENTRYPOINT ["java","-jar", "-Dspring.profiles.active=${PROFILE}", "/app.jar"]

@@ -53,9 +53,9 @@
 - [x] 클라우드 저장소 이미지 파일 업로드
   - [ ] ISSUE > 8MB 이상 파일 업로드시 inputStream 데이터 비는 현상 개선
 - [x] 서버 에러 핸들링(error handling)
-- [ ] Authguard 적용(간단한 정도의 인증/인가 미들웨어 구현) (apply auth middleware)
-- [ ] 테스트 코드 작성(test code)
-- [ ] 배포 자동화 CI/CD (profile 환경별 빌드 및 배포, build and deploy by each profile)
+- [ ] Webflux Security 적용(간단한 정도의 인증/인가 미들웨어 구현) (apply auth middleware)
+- [x] 테스트 코드 작성(test code) -> kotest
+- [X] 배포 자동화 CI/CD (profile 환경별 빌드 및 배포, build and deploy by each profile)
 - ~~(microservice는 손이 너무 많이 가서 일단 보류...)~~
 
 ## Get Started!
