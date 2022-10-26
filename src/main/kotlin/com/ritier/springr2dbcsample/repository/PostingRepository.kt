@@ -26,9 +26,6 @@ interface PostingRepository : ReactiveCrudRepository<Posting, Long> {
 @Repository
 class PostingCustomRepository(val databaseClient: DatabaseClient) {
 
-//    @Autowired
-//    private lateinit var databaseClient: DatabaseClient
-
     // Fetch user with profile img data(nullable)
     private val fetchUserQuery = "SELECT " +
             "u.user_id as user_id," +

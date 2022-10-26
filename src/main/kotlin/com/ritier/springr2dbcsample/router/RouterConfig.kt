@@ -43,6 +43,10 @@ class RouterConfig {
                     GET("/{id}") { postingHandler.getPosting(it) }
                     GET("/{id}/comments") { postingHandler.getAllCommentsByPostingId(it) }
                 }
+                "/auth".nest {
+                    POST("sign-up") { userHandler.signUp(it) }
+                    POST("sign-in") { userHandler.signIn(it) }
+                }
             }
         }
     }

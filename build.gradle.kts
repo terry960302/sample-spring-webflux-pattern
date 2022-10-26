@@ -49,6 +49,11 @@ dependencies {
 
 	// logger
 	implementation(group = "io.github.microutils", name = "kotlin-logging-jvm", version = "2.0.6")
+
+	// security
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("io.jsonwebtoken:jjwt:0.9.1") // jwt
+	implementation("org.mindrot:jbcrypt:0.4") // hash
 }
 
 tasks.withType<KotlinCompile> {
