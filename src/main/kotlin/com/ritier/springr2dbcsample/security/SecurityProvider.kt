@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component
 import java.util.*
 
 @Component
-class SecurityProvider {
+class SecurityProvider(val env : Environment) {
 
-    @Autowired
-    private lateinit var env : Environment
+//    @Autowired
+//    private lateinit var env : Environment
     private val jwtSecret = env.getProperty<String>("spring.security.jwt.secret")
     private val expiration = env.getProperty<Long>("spring.security.jwt.expiration")
 

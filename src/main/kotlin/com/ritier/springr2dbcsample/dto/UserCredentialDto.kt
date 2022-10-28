@@ -17,8 +17,8 @@ class UserCredentialDto
     companion object Mapper {
         fun from(userCredential: UserCredential): UserCredentialDto {
             return UserCredentialDto(
-                id = userCredential.id,
-                userId = userCredential.userId,
+                id = userCredential.id!!,
+                userId = userCredential.userId!!,
                 email = userCredential.email,
                 password = userCredential.password,
                 role = userCredential.role,

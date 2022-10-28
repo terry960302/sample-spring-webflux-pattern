@@ -11,7 +11,7 @@ data class UserDto(
     companion object Mapper {
         fun from(user: User): UserDto {
             return UserDto(
-                id = user.id,
+                id = user.id!!,
                 nickname = user.nickname,
                 age = user.age,
                 profileImg = if (user.profileImg == null) null else ImageDto.from(user.profileImg),
