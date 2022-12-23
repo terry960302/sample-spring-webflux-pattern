@@ -31,7 +31,8 @@
      ![image](https://user-images.githubusercontent.com/37768791/193278481-6bdd70a1-70d8-440b-b256-cc546c12d19f.png)
    - Resolved by Fluent API in R2DBC.(can put sort or offset stuffs using Fluent API template.)
 6. There's other relation mapping support(alternatives) on reactive db connection API which called `Hibernate Reactive`(can use with Hibernate ORM) and `Kotlin JDSL Reactive`
-
+7. [221223 UPDATE] QueryDsl could resolve relation mapping issue
+8. [221223 UPDATE] What about [java-dataloader](https://github.com/graphql-java/java-dataloader) to resolve `n+1` issue when want to fetch join data not using join functionality.
 ## Introduction
 
 ### ERD 
