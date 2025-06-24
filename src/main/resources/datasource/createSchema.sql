@@ -1,0 +1,74 @@
+-- [CREATE] tables
+CREATE TABLE IF NOT EXISTS IMAGES (
+    image_id SERIAL NOT NULL,
+    file_name VARCHAR(255) NOT NULL,
+    width INT NOT NULL,
+    height INT NOT NULL,
+    file_size BIGINT NOT NULL,
+    mime_type VARCHAR(100) NOT NULL,
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    url TEXT,
+    PRIMARY KEY (image_id)
+);
+CREATE TABLE IF NOT EXISTS users (
+    user_id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    username VARCHAR(255) NOT NULL,
+    age INT NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    profile_img_id BIGINT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- User Credentials 테이블 생성
+CREATE TABLE IF NOT EXISTS user_credentials (
+    user_credential_id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id BIGINT NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_login_at TIMESTAMP NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT fk_user_credentials_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+--CREATE TABLE IF NOT EXISTS USERS (
+--    user_id SERIAL NOT NULL,
+--    username VARCHAR(255) NOT NULL,
+--    email VARCHAR(255) NOT NULL,
+--    age BIGINT,
+--    profile_img_id SERIAL,
+--    PRIMARY KEY (user_id),
+--    FOREIGN KEY (profile_img_id) REFERENCES images(image_id) ON DELETE CASCADE ON UPDATE CASCADE
+--);
+
+CREATE TABLE IF NOT EXISTS POSTINGS (
+    posting_id SERIAL NOT NULL,
+    user_id SERIAL NOT NULL,
+    contents TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY(posting_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- comment table
+CREATE TABLE IF NOT EXISTS POSTING_COMMENTS (
+    comment_id SERIAL NOT NULL,
+    user_id SERIAL NOT NULL,
+    posting_id SERIAL NOT NULL,
+    contents TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    PRIMARY KEY(comment_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (posting_id) REFERENCES postings(posting_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS POSTING_IMAGES (
+    posting_image_id SERIAL NOT NULL,
+    image_id SERIAL NOT NULL,
+    posting_id SERIAL NOT NULL,
+    PRIMARY KEY(posting_image_id),
+    FOREIGN KEY (image_id) REFERENCES images(image_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (posting_id) REFERENCES postings(posting_id) ON DELETE CASCADE ON UPDATE CASCADE
+);

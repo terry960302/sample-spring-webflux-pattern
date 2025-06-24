@@ -1,0 +1,32 @@
+spring:
+  security:
+    jwt:
+      secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+      expiration: 28800
+    password:
+      hash:
+        round: 33
+
+    user:
+      name: terry
+      password: 1234
+
+  r2dbc:
+    protocol: r2dbc:postgresql
+    host: localhost
+    port: 5432
+    username: postgres
+    password: postgres
+    database: postgres
+
+  logging:
+    config: classpath:logback-dev.xml
+
+app:
+  storage:
+    cred-path: src/main/resources/key.json
+    project-id: terry-dev
+    bucket-name: terry-storage-dev
+
+
+
