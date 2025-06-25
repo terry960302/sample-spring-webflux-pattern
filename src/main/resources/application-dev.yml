@@ -1,16 +1,4 @@
 spring:
-  security:
-    jwt:
-      secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
-      expiration: 28800
-    password:
-      hash:
-        round: 33
-
-    user:
-      name: terry
-      password: 1234
-
   r2dbc:
     protocol: r2dbc:postgresql
     host: localhost
@@ -22,7 +10,15 @@ spring:
   logging:
     config: classpath:logback-dev.xml
 
+
 app:
+  security:
+    jwt:
+      secret: 67f2eca07f6d95526b60e9421dc040e20d239a4c0d6f545135e699178f5b8313
+      expiration: 28800
+    password:
+      hash:
+        rounds: 30
   storage:
     cred-path: src/main/resources/key.json
     project-id: terry-dev
