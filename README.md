@@ -4,6 +4,7 @@
 
 # Sample Spring Webflux Reactive Pattern Template
 > 간단한 커뮤니티 구조의 백엔드 API 서버를 Hexagonal Architecture 에 기반하여 구현했습니다.(Webflux패턴 기반)
+<img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/1a11e0fb-5691-4b36-81ea-c3988754b2c5" />
 >> Simple Social network stuff Structure based Back-end API server using Spring Webflux pattern.
 
 ## Background
